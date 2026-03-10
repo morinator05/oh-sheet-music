@@ -1,39 +1,27 @@
+# Build-Ordner
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-.kotlin
+out/
+build/
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
+# IDEs
+.idea/
+.mvn/
+.vscode/
+.settings/
+.project
+.classpath
 *.iml
+*.iws
 *.ipr
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-
-### Mac OS ###
+# Betriebssysteme
 .DS_Store
+Thumbs.db
+
+# DB
+*.db
+*.db-journal
+
+# Maven Wrapper Scripte
+mvnw
+mvnw.cmd
