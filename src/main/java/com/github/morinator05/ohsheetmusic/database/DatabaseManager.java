@@ -98,12 +98,21 @@ public class DatabaseManager {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-
     }
 
     public static void updatePiece(int id, String newName, String newCabinet_row, String newCabinet_column) {
-        //TODO
+        var sql = "UPDATE register SET title = ?, cabinet_row = ?, cabinet_column = ? WHERE id = ?";
+
+        try (var conn = DriverManager.getConnection(dbPath);
+             var pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newName);
+            pstmt.setString(2, newCabinet_row);
+            pstmt.setString(3, newCabinet_column);
+            pstmt.setInt(4, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
-
-
 }
