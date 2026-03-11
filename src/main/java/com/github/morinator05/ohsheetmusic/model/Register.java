@@ -42,14 +42,18 @@ public class Register {
 
     public void addPiece(PieceOfMusic piece) {
         addedPieces.add(piece);
+        contents.add(piece);
     }
 
     public void removePiece(PieceOfMusic piece) {
         removedPieces.add(piece);
+        contents.removeIf(p -> p.getId() == piece.getId());
     }
 
     public void updatePiece(PieceOfMusic piece) {
         updatedPieces.add(piece);
+        contents.removeIf(p -> p.getId() == piece.getId());
+        contents.add(piece);
     }
 
 }

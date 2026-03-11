@@ -33,6 +33,15 @@ public class DatabaseManager {
         }
     }
 
+    public static void clearDatabase() {
+        var sql = "DELETE FROM register";
+        try (var conn = DriverManager.getConnection(dbPath); var stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static List<PieceOfMusic> getAllPieces() {
 
         List<PieceOfMusic> pieces = new ArrayList<>();
@@ -76,11 +85,20 @@ public class DatabaseManager {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public static void removePiece(int id) {
-        //TODO
+        var sql = "DELETE FROM register WHERE id = ?";
+
+        try (var conn = DriverManager.getConnection(dbPath);
+             var pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
     }
 
     public static void updatePiece(int id, String newName, String newCabinet_row, String newCabinet_column) {

@@ -11,6 +11,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class OhSheetMusicApp extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -23,6 +24,8 @@ public class OhSheetMusicApp extends Application {
         stage.setTitle("OhMySheetMusic");
 
         stage.setScene(scene);
+        stage.sizeToScene();
+        stage.setResizable(false);
         stage.show();
 
     }
