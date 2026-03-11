@@ -9,9 +9,13 @@ import java.util.List;
 
 public class DatabaseManager {
 
-    static final String DATABASE_URL = "jdbc:sqlite:oh-sheet-music.db";
+    private static String dbPath = "jdbc:sqlite:oh-sheet-music.db"; //default path for database
 
     DatabaseManager() {
+    }
+
+    public static void setDatabasePath(String newPath) {
+        dbPath = "jdbc:sqlite:" + newPath;
     }
 
     public static void initDatabase() {
@@ -22,7 +26,7 @@ public class DatabaseManager {
                 "	cabinet_row INTEGER," +
                 "	cabinet_column TEXT" + ");";
 
-        try (var conn = DriverManager.getConnection(DATABASE_URL); var stmt = conn.createStatement()) {
+        try (var conn = DriverManager.getConnection(dbPath); var stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -34,7 +38,7 @@ public class DatabaseManager {
         List<PieceOfMusic> pieces = new ArrayList<>();
         var sql = "SELECT * from register";
 
-        try (var conn = DriverManager.getConnection(DATABASE_URL);
+        try (var conn = DriverManager.getConnection(dbPath);
              var stmt = conn.createStatement();
              var rs = stmt.executeQuery(sql)) {
 
@@ -59,7 +63,7 @@ public class DatabaseManager {
 
         var sql = "INSERT INTO register(title, cabinet_row, cabinet_column) VALUES(?, ?, ?)";
 
-        try (var conn = DriverManager.getConnection(DATABASE_URL); var stmt = conn.createStatement()) {
+        try (var conn = DriverManager.getConnection(dbPath); var stmt = conn.createStatement()) {
 
             var pstmt = conn.prepareStatement(sql);
 
