@@ -5,32 +5,32 @@ package com.github.morinator05.ohsheetmusic.model;
  */
 public class PieceOfMusic {
 
-    private final String name;
+    private final String title;
     private final int id;
 
-    private final char number; // 0-7
-    private final char letter; //a-z
+    private final String number; // 0-7
+    private final String letter; //a-z
 
-    public PieceOfMusic(String name, int id, char number, char letter) {
-        this.name = name;
+    public PieceOfMusic(String title, int id, String number, String letter) {
+        this.title = title;
         this.id = id;
         this.number = number;
         this.letter = letter;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public int getId() {
         return id;
     }
 
-    public char getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public char getLetter() {
+    public String getLetter() {
         return letter;
     }
 }

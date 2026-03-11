@@ -1,6 +1,7 @@
 package com.github.morinator05.ohsheetmusic;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,8 +14,11 @@ public class OhSheetMusicApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Group root = new Group();
-        Scene scene = new Scene(root, Color.DARKGREY);
+        String fxmlPath = "/com/github/morinator05/ohsheetmusic/view/main-view.fxml";
+
+        FXMLLoader fxmlLoader = new FXMLLoader(OhSheetMusicApp.class.getResource(fxmlPath));
+
+        Scene scene = new Scene(fxmlLoader.load());
 
         stage.setTitle("OhMySheetMusic");
 

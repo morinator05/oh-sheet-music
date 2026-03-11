@@ -9,13 +9,12 @@ import java.util.List;
 
 public class DatabaseManager {
 
+    static final String DATABASE_URL = "jdbc:sqlite:oh-sheet-music.db";
+
     DatabaseManager() {
     }
 
     public static void initDatabase() {
-        // SQLite connection string
-        var url = "jdbc:sqlite:oh-sheet-music.db";
-
         // SQL statement for creating a new table
         var sql = "CREATE TABLE IF NOT EXISTS register (" +
                 "	id INTEGER PRIMARY KEY," +
@@ -23,8 +22,7 @@ public class DatabaseManager {
                 "	cabinet_row INTEGER," +
                 "	cabinet_column TEXT" + ");";
 
-
-        try (var conn = DriverManager.getConnection(url); var stmt = conn.createStatement()) {
+        try (var conn = DriverManager.getConnection(DATABASE_URL); var stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -32,19 +30,56 @@ public class DatabaseManager {
     }
 
     public static List<PieceOfMusic> getAllPieces() {
-        //TODO
-        return new ArrayList<>();
+
+        List<PieceOfMusic> pieces = new ArrayList<>();
+        var sql = "SELECT * from register";
+
+        try (var conn = DriverManager.getConnection(DATABASE_URL);
+             var stmt = conn.createStatement();
+             var rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                PieceOfMusic p = new PieceOfMusic(
+                        rs.getString("title"),
+                        rs.getInt("id"),
+                        rs.getString("cabinet_row"),
+                        rs.getString("cabinet_column")
+                );
+                pieces.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return pieces;
     }
 
-    public static void addPiece(String title, char cabinet_row, char cabinet_column) {
-        //TODO
+    public static void addPiece(String title, String cabinet_row, String cabinet_column) {
+
+        var sql = "INSERT INTO register(title, cabinet_row, cabinet_column) VALUES(?, ?, ?)";
+
+        try (var conn = DriverManager.getConnection(DATABASE_URL); var stmt = conn.createStatement()) {
+
+            var pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, title);
+            pstmt.setString(2, cabinet_row);
+            pstmt.setString(3, cabinet_column);
+
+            pstmt.execute();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public static void removePiece(int id) {
         //TODO
     }
 
-    public static void updatePiece(int id, String newName, char newCabinet_row, char newCabinet_column) {
+    public static void updatePiece(int id, String newName, String newCabinet_row, String newCabinet_column) {
         //TODO
     }
 

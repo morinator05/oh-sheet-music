@@ -7,43 +7,49 @@ import java.util.List;
 
 public class Register {
 
-    private List<PieceOfMusic> contents;
-    private List<PieceOfMusic> addedPieces;
-    private List<PieceOfMusic> removedPieces;
-    private List<PieceOfMusic> updatedPieces;
+    private final List<PieceOfMusic> contents;
+    private final List<PieceOfMusic> addedPieces;
+    private final List<PieceOfMusic> removedPieces;
+    private final List<PieceOfMusic> updatedPieces;
 
-    Register() {
+    public Register() {
         this.contents = new ArrayList<>();
         this.addedPieces = new ArrayList<>();
         this.removedPieces = new ArrayList<>();
         this.updatedPieces = new ArrayList<>();
     }
 
-    public void save() {
-        for (PieceOfMusic piece : addedPieces) {
-            DatabaseManager.addPiece(piece.getName(), piece.getNumber(), piece.getLetter());
-        }
-        for (PieceOfMusic piece : removedPieces) {
-            DatabaseManager.removePiece(piece.getId());
-        }
-        for (PieceOfMusic piece : updatedPieces) {
-            DatabaseManager.updatePiece(piece.getId(), piece.getName(), piece.getNumber(), piece.getLetter());
-        }
-        clearChanges();
-    }
-
-    public void load(){
-        this.contents = DatabaseManager.getAllPieces();
-        clearChanges();
-    }
-
     public List<PieceOfMusic> getContents() {
         return contents;
     }
 
-    private void clearChanges() {
-        addedPieces.clear();
-        removedPieces.clear();
-        updatedPieces.clear();
+    public void setContents(List<PieceOfMusic> pieces) {
+        this.contents.clear();
+        this.contents.addAll(pieces);
     }
+
+    public List<PieceOfMusic> getAddedPieces() {
+        return addedPieces;
+    }
+
+    public List<PieceOfMusic> getUpdatedPieces() {
+        return updatedPieces;
+    }
+
+    public List<PieceOfMusic> getRemovedPieces() {
+        return removedPieces;
+    }
+
+    public void addPiece(PieceOfMusic piece) {
+        addedPieces.add(piece);
+    }
+
+    public void removePiece(PieceOfMusic piece) {
+        removedPieces.add(piece);
+    }
+
+    public void updatePiece(PieceOfMusic piece) {
+        updatedPieces.add(piece);
+    }
+
 }

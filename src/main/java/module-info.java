@@ -4,8 +4,9 @@ module com.github.morinator05.ohsheetmusic {
     requires java.desktop;
     requires java.sql;
 
+    opens com.github.morinator05.ohsheetmusic.view to javafx.fxml;
+    opens com.github.morinator05.ohsheetmusic.controller to javafx.fxml;
 
-    opens com.github.morinator05.ohsheetmusic to javafx.fxml;
     exports com.github.morinator05.ohsheetmusic;
     exports com.github.morinator05.ohsheetmusic.database;
     exports com.github.morinator05.ohsheetmusic.model;
