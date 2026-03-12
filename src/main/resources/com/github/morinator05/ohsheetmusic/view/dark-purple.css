@@ -1,0 +1,99 @@
+/*Basic dark purple theme, written by LLM*/
+
+/* Root */
+.root {
+    -fx-base: #1b181c;
+    -fx-background-color: #1b181c;
+    -fx-text-fill: white;
+}
+
+/* General text */
+.label, .text {
+    -fx-text-fill: white;
+    -fx-fill: white;
+}
+
+/* Menu bar */
+.menu-bar {
+    -fx-background-color: #252126;
+}
+
+.menu-item:focused {
+    -fx-background-color: #693d65;
+}
+
+/* Default buttons */
+.button {
+    -fx-background-color: #2e2830;
+    -fx-text-fill: white;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+/* --- ACTION BUTTONS --- */
+
+/* Add / New (pastel green) */
+#buttonNew {
+    -fx-border-color: #6f9f7b;
+    -fx-border-width: 2;
+}
+
+#buttonNew:hover {
+    -fx-background-color: #3a323d;
+}
+
+/* Update (pastel purple) */
+#buttonUpdate {
+    -fx-border-color: #a07aa4;
+    -fx-border-width: 2;
+}
+
+#buttonUpdate:hover {
+    -fx-background-color: #3a323d;
+}
+
+/* Remove (pastel red) */
+#buttonRemove {
+    -fx-border-color: #b57a7a;
+    -fx-border-width: 2;
+}
+
+#buttonRemove:hover {
+    -fx-background-color: #3a323d;
+}
+
+/* Path text */
+#textPath {
+    -fx-fill: #d8d8d8;
+}
+
+/* Table */
+.table-view {
+    -fx-background-color: #252126;
+    -fx-control-inner-background: #252126;
+    -fx-table-cell-border-color: #2f2a31;
+}
+
+/* Table header */
+.table-view .column-header-background {
+    -fx-background-color: #2e2830;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+
+/* Table rows */
+.table-row-cell {
+    -fx-background-color: #252126;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #693d65;
+}
+
+/* Table cells */
+.table-cell {
+    -fx-text-fill: white;
+    -fx-border-color: #2f2a31;
+}

@@ -2,12 +2,9 @@ package com.github.morinator05.ohsheetmusic;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.paint.Color;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class OhSheetMusicApp extends Application {
@@ -21,7 +18,7 @@ public class OhSheetMusicApp extends Application {
 
         Scene scene = new Scene(fxmlLoader.load());
 
-        String css = getClass().getResource("/com/github/morinator05/ohsheetmusic/view/style.css").toExternalForm();
+        String css = getClass().getResource("/com/github/morinator05/ohsheetmusic/view/dark-purple.css").toExternalForm();
         scene.getStylesheets().add(css);
 
         stage.setTitle("OhMySheetMusic");
