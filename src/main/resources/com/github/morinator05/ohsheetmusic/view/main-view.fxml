@@ -81,7 +81,7 @@
                                 <TableColumn fx:id="tableTitle" prefWidth="300.0" text="Title"/>
                                 <TableColumn fx:id="tableNumber" prefWidth="75.0" text="Number"/>
                                 <TableColumn fx:id="tableLetter" prefWidth="75.0" text="Letter"/>
-                                <TableColumn fx:id="tableGenre" maxWidth="1.7976931348623157E308" minWidth="-1.0"
+                                <TableColumn fx:id="tableCategory" maxWidth="1.7976931348623157E308" minWidth="-1.0"
                                              prefWidth="479.0" text="Category"/>
                             </columns>
                             <columnResizePolicy>

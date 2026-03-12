@@ -26,9 +26,9 @@ public class DatabaseManagerTest {
 
     @Test
     void testInsert() {
-        DatabaseManager.addPiece("Titel1", "01", "A");
-        DatabaseManager.addPiece("Titel2", "01", "B");
-        DatabaseManager.addPiece("Titel3", "03", "A");
+        DatabaseManager.addPiece("Titel1", "C!", "01", "A");
+        DatabaseManager.addPiece("Titel2", "C!","01", "B");
+        DatabaseManager.addPiece("Titel3","C!", "03", "A");
 
         assertEquals(3, DatabaseManager.getAllPieces().size());
     }

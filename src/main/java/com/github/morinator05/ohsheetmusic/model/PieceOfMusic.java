@@ -7,13 +7,15 @@ public class PieceOfMusic {
 
     private final String title;
     private final int id;
+    private final String category;
 
     private final String number; // 0-7
     private final String letter; //a-z
 
-    public PieceOfMusic(String title, int id, String number, String letter) {
+    public PieceOfMusic(String title, int id, String category, String number, String letter) {
         this.title = title;
         this.id = id;
+        this.category = category;
         this.number = number;
         this.letter = letter;
     }
@@ -32,5 +34,9 @@ public class PieceOfMusic {
 
     public String getLetter() {
         return letter;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }

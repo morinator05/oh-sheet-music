@@ -54,7 +54,7 @@ public class ModifyController {
         } else {
             id = 0;
         }
-        PieceOfMusic result = new PieceOfMusic(title, id, number, letter);
+        PieceOfMusic result = new PieceOfMusic(title, id, category, number, letter);
 
         onSave.accept(result);
 

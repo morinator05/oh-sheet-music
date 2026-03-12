@@ -23,6 +23,7 @@ public class DatabaseManager {
         var sql = "CREATE TABLE IF NOT EXISTS register (" +
                 "	id INTEGER PRIMARY KEY," +
                 "	title TEXT NOT NULL," +
+                "   category TEXT NOT NULL" +
                 "	cabinet_row INTEGER," +
                 "	cabinet_column TEXT" + ");";
 
@@ -55,6 +56,7 @@ public class DatabaseManager {
                 PieceOfMusic p = new PieceOfMusic(
                         rs.getString("title"),
                         rs.getInt("id"),
+                        rs.getString("category"),
                         rs.getString("cabinet_row"),
                         rs.getString("cabinet_column")
                 );
@@ -68,17 +70,18 @@ public class DatabaseManager {
         return pieces;
     }
 
-    public static void addPiece(String title, String cabinet_row, String cabinet_column) {
+    public static void addPiece(String title, String category, String cabinet_row, String cabinet_column) {
 
-        var sql = "INSERT INTO register(title, cabinet_row, cabinet_column) VALUES(?, ?, ?)";
+        var sql = "INSERT INTO register(title, category, cabinet_row, cabinet_column) VALUES(?, ?, ?)";
 
         try (var conn = DriverManager.getConnection(dbPath); var stmt = conn.createStatement()) {
 
             var pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, title);
-            pstmt.setString(2, cabinet_row);
-            pstmt.setString(3, cabinet_column);
+            pstmt.setString(2, category);
+            pstmt.setString(3, cabinet_row);
+            pstmt.setString(4, cabinet_column);
 
             pstmt.execute();
 

@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.PrimitiveIterator;
 
 public class Controller {
 
@@ -39,6 +40,8 @@ public class Controller {
     private TableColumn<PieceOfMusic, String> tableNumber;
     @FXML
     private TableColumn<PieceOfMusic, String> tableLetter;
+    @FXML
+    private TableColumn<PieceOfMusic, String> tableCategory;
 
     @FXML
     public void initialize() {
@@ -59,6 +62,7 @@ public class Controller {
         tableTitle.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("title"));
         tableNumber.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("number"));
         tableLetter.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("letter"));
+        tableCategory.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("category"));
 
         tableView.getItems().setAll(register.getContents());
     }
@@ -74,7 +78,7 @@ public class Controller {
         List<PieceOfMusic> removedPieces = register.getRemovedPieces();
 
         for (PieceOfMusic piece : addedPieces) {
-            DatabaseManager.addPiece(piece.getTitle(), piece.getNumber(), piece.getLetter());
+            DatabaseManager.addPiece(piece.getTitle(), piece.getCategory(), piece.getNumber(), piece.getLetter());
         }
         for (PieceOfMusic piece : removedPieces) {
             DatabaseManager.removePiece(piece.getId());
