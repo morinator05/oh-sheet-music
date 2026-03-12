@@ -38,6 +38,7 @@ public class ModifyController {
             fieldTitle.setText(selected.getTitle());
             fieldNumber.setText(selected.getNumber());
             fieldLetter.setText(selected.getLetter());
+            fieldCategory.setText(selected.getCategory());
         }
     }
 

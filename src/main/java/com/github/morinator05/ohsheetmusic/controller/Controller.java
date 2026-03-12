@@ -51,6 +51,7 @@ public class Controller {
         DatabaseManager.setDatabasePath(currentFile.getAbsolutePath());
         textPath.setText(currentFile.getAbsolutePath());
 
+        DatabaseManager.initDatabase();
         this.register = new Register();
         List<PieceOfMusic> dbData = DatabaseManager.getAllPieces();
         register.setContents(dbData);
@@ -79,14 +80,17 @@ public class Controller {
 
         for (PieceOfMusic piece : addedPieces) {
             DatabaseManager.addPiece(piece.getTitle(), piece.getCategory(), piece.getNumber(), piece.getLetter());
+            System.out.println("Adding: " + piece.getTitle());
         }
         for (PieceOfMusic piece : removedPieces) {
             DatabaseManager.removePiece(piece.getId());
+            System.out.println("Removing: " + piece.getTitle());
         }
         for (PieceOfMusic piece : updatedPieces) {
             DatabaseManager.updatePiece(piece.getId(), piece.getTitle(), piece.getNumber(), piece.getLetter());
+            System.out.println("Updating: " + piece.getTitle());
         }
-        System.out.println("Saved in: " + currentFile.getAbsolutePath());
+        System.out.println("Save completed: " + currentFile.getAbsolutePath());
     }
 
     @FXML

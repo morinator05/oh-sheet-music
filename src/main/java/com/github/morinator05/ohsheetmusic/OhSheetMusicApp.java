@@ -21,6 +21,9 @@ public class OhSheetMusicApp extends Application {
 
         Scene scene = new Scene(fxmlLoader.load());
 
+        String css = getClass().getResource("/com/github/morinator05/ohsheetmusic/view/style.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
         stage.setTitle("OhMySheetMusic");
 
         stage.setScene(scene);

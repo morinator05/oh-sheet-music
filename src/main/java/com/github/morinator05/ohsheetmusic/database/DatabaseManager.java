@@ -23,7 +23,7 @@ public class DatabaseManager {
         var sql = "CREATE TABLE IF NOT EXISTS register (" +
                 "	id INTEGER PRIMARY KEY," +
                 "	title TEXT NOT NULL," +
-                "   category TEXT NOT NULL" +
+                "   category TEXT NOT NULL," +
                 "	cabinet_row INTEGER," +
                 "	cabinet_column TEXT" + ");";
 
@@ -71,22 +71,20 @@ public class DatabaseManager {
     }
 
     public static void addPiece(String title, String category, String cabinet_row, String cabinet_column) {
+        var sql = "INSERT INTO register(title, category, cabinet_row, cabinet_column) VALUES(?, ?, ?, ?)";
 
-        var sql = "INSERT INTO register(title, category, cabinet_row, cabinet_column) VALUES(?, ?, ?)";
-
-        try (var conn = DriverManager.getConnection(dbPath); var stmt = conn.createStatement()) {
-
-            var pstmt = conn.prepareStatement(sql);
+        try (var conn = DriverManager.getConnection(dbPath);
+             var pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, title);
             pstmt.setString(2, category);
             pstmt.setString(3, cabinet_row);
             pstmt.setString(4, cabinet_column);
 
-            pstmt.execute();
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println("Error adding piece: " + e.getMessage());
         }
     }
 
