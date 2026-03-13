@@ -26,8 +26,8 @@
                         <MenuItem fx:id="close" mnemonicParsing="false" onAction="#handleClose" text="Close" />
                         <MenuItem fx:id="save" mnemonicParsing="false" onAction="#handleSave" text="Save" />
                         <MenuItem fx:id="saveas" mnemonicParsing="false" onAction="#handleSaveAs" text="Save As…" />
-                  <MenuItem fx:id="export" mnemonicParsing="false" onAction="#handleExport" text="Export To PDF" />
                         <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="export" mnemonicParsing="false" onAction="#handleExport" text="Export To PDF" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#handleQuit" text="Quit" />
                     </items>
