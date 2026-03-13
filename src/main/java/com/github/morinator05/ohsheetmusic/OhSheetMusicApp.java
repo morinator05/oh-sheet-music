@@ -31,7 +31,7 @@ public class OhSheetMusicApp extends Application {
                 new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/github/morinator05/ohsheetmusic/icons/icon64.png")))
         );
 
-        stage.setTitle("OhMySheetMusic");
+        stage.setTitle("OhSheetMusic");
 
         stage.setScene(scene);
         stage.sizeToScene();
