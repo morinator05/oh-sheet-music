@@ -56,4 +56,10 @@ public class Register {
         contents.add(piece);
     }
 
+    public void flushUpdated() {
+        this.addedPieces.clear();
+        this.removedPieces.clear();
+        this.updatedPieces.clear();
+    }
+
 }

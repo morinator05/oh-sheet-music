@@ -75,22 +75,19 @@ public class Controller {
         if (currentFile == null) {
             return;
         }
-        List<PieceOfMusic> addedPieces = register.getAddedPieces();
-        List<PieceOfMusic> updatedPieces = register.getUpdatedPieces();
-        List<PieceOfMusic> removedPieces = register.getRemovedPieces();
-
-        for (PieceOfMusic piece : addedPieces) {
+        for (PieceOfMusic piece : register.getAddedPieces()) {
             DatabaseManager.addPiece(piece.getTitle(), piece.getCategory(), piece.getNumber(), piece.getLetter());
             System.out.println("adding: " + piece.getTitle());
         }
-        for (PieceOfMusic piece : removedPieces) {
+        for (PieceOfMusic piece : register.getRemovedPieces()) {
             DatabaseManager.removePiece(piece.getId());
             System.out.println("removing: " + piece.getTitle());
         }
-        for (PieceOfMusic piece : updatedPieces) {
+        for (PieceOfMusic piece : register.getUpdatedPieces()) {
             DatabaseManager.updatePiece(piece.getId(), piece.getTitle(), piece.getCategory(), piece.getNumber(), piece.getLetter());
             System.out.println("updating: " + piece.getTitle());
         }
+        register.flushUpdated();
         System.out.println("save: completed at " + currentFile.getAbsolutePath());
     }
 
