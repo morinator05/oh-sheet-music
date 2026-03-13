@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="509.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.morinator05.ohsheetmusic.controller.Controller">
+<VBox prefHeight="500.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.morinator05.ohsheetmusic.controller.Controller">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -53,9 +53,9 @@
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="659.0" minWidth="10.0" prefWidth="650.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="652.0" minWidth="10.0" prefWidth="75.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="125.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="125.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="125.0" />
                             </columnConstraints>
                             <rowConstraints>
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -71,8 +71,8 @@
                             <columns>
                                 <TableColumn fx:id="tableId" prefWidth="75.0" text="Id" />
                                 <TableColumn fx:id="tableTitle" prefWidth="300.0" text="Title" />
-                                <TableColumn fx:id="tableLetter" prefWidth="75.0" text="Letter" />
-                                <TableColumn fx:id="tableNumber" prefWidth="75.0" text="Number" />
+                                <TableColumn fx:id="tableLetter" minWidth="100.0" prefWidth="-1.0" text="Letter" />
+                                <TableColumn fx:id="tableNumber" minWidth="100.0" prefWidth="-1.0" text="Number" />
                                 <TableColumn fx:id="tableCategory" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="479.0" text="Category" />
                             </columns>
                             <columnResizePolicy>

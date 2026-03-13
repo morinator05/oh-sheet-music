@@ -3,6 +3,7 @@ module com.github.morinator05.ohsheetmusic {
     requires javafx.fxml;
     requires java.desktop;
     requires java.sql;
+    requires atlantafx.base;
 
     opens com.github.morinator05.ohsheetmusic.view to javafx.fxml;
     opens com.github.morinator05.ohsheetmusic.controller to javafx.fxml;

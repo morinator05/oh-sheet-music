@@ -1,11 +1,14 @@
 package com.github.morinator05.ohsheetmusic;
 
+import atlantafx.base.theme.PrimerDark;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class OhSheetMusicApp extends Application {
 
@@ -18,8 +21,15 @@ public class OhSheetMusicApp extends Application {
 
         Scene scene = new Scene(fxmlLoader.load());
 
-        String css = getClass().getResource("/com/github/morinator05/ohsheetmusic/view/dark-purple.css").toExternalForm();
-        scene.getStylesheets().add(css);
+//        String css = getClass().getResource("/com/github/morinator05/ohsheetmusic/view/dark-purple.css").toExternalForm();
+//        scene.getStylesheets().add(css);
+
+        Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
+
+        stage.getIcons().addAll(
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/github/morinator05/ohsheetmusic/icons/icon32.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/github/morinator05/ohsheetmusic/icons/icon64.png")))
+        );
 
         stage.setTitle("OhMySheetMusic");
 

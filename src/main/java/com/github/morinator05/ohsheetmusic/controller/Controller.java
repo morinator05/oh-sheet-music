@@ -55,7 +55,7 @@ public class Controller {
         this.register = new Register();
         List<PieceOfMusic> dbData = DatabaseManager.getAllPieces();
         register.setContents(dbData);
-        System.out.println("Daten geladen: " + register.getContents().size() + " Stücke.");
+        System.out.println("innit: " + register.getContents().size() + " pieces loaded");
 
         musicList = FXCollections.observableArrayList(register.getContents());
 
@@ -70,7 +70,7 @@ public class Controller {
 
     @FXML
     public void handleSave() {
-        System.out.println("Saving data...");
+        System.out.println("saving: ");
         if (currentFile == null) {
             return;
         }
@@ -80,17 +80,17 @@ public class Controller {
 
         for (PieceOfMusic piece : addedPieces) {
             DatabaseManager.addPiece(piece.getTitle(), piece.getCategory(), piece.getNumber(), piece.getLetter());
-            System.out.println("Adding: " + piece.getTitle());
+            System.out.println("adding: " + piece.getTitle());
         }
         for (PieceOfMusic piece : removedPieces) {
             DatabaseManager.removePiece(piece.getId());
-            System.out.println("Removing: " + piece.getTitle());
+            System.out.println("removing: " + piece.getTitle());
         }
         for (PieceOfMusic piece : updatedPieces) {
-            DatabaseManager.updatePiece(piece.getId(), piece.getTitle(), piece.getNumber(), piece.getLetter());
-            System.out.println("Updating: " + piece.getTitle());
+            DatabaseManager.updatePiece(piece.getId(), piece.getTitle(), piece.getCategory(), piece.getNumber(), piece.getLetter());
+            System.out.println("updating: " + piece.getTitle());
         }
-        System.out.println("Save completed: " + currentFile.getAbsolutePath());
+        System.out.println("save: completed at " + currentFile.getAbsolutePath());
     }
 
     @FXML
