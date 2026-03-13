@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -120,56 +121,14 @@ public class Controller {
 
     @FXML
     void handleNew() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(OhSheetMusicApp.class.getResource("/com/github/morinator05/ohsheetmusic/view/modify-view.fxml"));
-            Parent root = fxmlLoader.load();
-            ModifyController modifyController = fxmlLoader.getController();
-
-            modifyController.handleModify(null, (piece) -> {
-                register.addPiece(piece);
-                refreshView();
-            });
-
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setTitle("Add new piece!");
-            stage.setScene(scene);
-            stage.sizeToScene();
-            stage.setResizable(false);
-            modifyController.setStage(stage);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        openModifyWindow("Add a new piece!", null);
     }
 
     @FXML
     void handleUpdate() {
         PieceOfMusic selectedItem = tableView.getSelectionModel().getSelectedItem();
-        if (selectedItem == null) return;
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(OhSheetMusicApp.class.getResource("/com/github/morinator05/ohsheetmusic/view/modify-view.fxml"));
-            Parent root = fxmlLoader.load();
-            ModifyController modifyController = fxmlLoader.getController();
-
-            modifyController.handleModify(selectedItem, (piece) -> {
-                register.updatePiece(piece);
-                refreshView();
-            });
-
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setTitle("Add new piece!");
-            stage.setScene(scene);
-            stage.sizeToScene();
-            stage.setResizable(false);
-            modifyController.setStage(stage);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (selectedItem != null) {
+            openModifyWindow("Update the selected piece!", selectedItem);
         }
     }
 
@@ -186,6 +145,33 @@ public class Controller {
         musicList.setAll(register.getContents());
         tableView.setItems(musicList);
         tableView.refresh();
+    }
+
+    private void openModifyWindow(String windowTitle, PieceOfMusic selectedPiece) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(OhSheetMusicApp.class.getResource("/com/github/morinator05/ohsheetmusic/view/modify-view.fxml"));
+            Parent root = fxmlLoader.load();
+            ModifyController modifyController = fxmlLoader.getController();
+
+            modifyController.handleModify(selectedPiece, (piece) -> {
+                if (selectedPiece == null) {
+                    register.addPiece(piece);
+                } else {
+                    register.updatePiece(piece);
+                }
+                refreshView();
+            });
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setTitle(windowTitle);
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setResizable(false);
+            modifyController.setStage(stage);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
