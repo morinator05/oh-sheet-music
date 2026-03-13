@@ -56,7 +56,7 @@ public class Controller {
         this.register = new Register();
         List<PieceOfMusic> dbData = DatabaseManager.getAllPieces();
         register.setContents(dbData);
-        System.out.println("innit: " + register.getContents().size() + " pieces loaded");
+        System.out.println("init: " + register.getContents().size() + " pieces loaded");
 
         musicList = FXCollections.observableArrayList(register.getContents());
 
