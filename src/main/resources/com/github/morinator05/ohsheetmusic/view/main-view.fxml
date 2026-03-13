@@ -20,20 +20,21 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" text="Open…" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleNew" text="New" />
+                        <MenuItem fx:id="open" mnemonicParsing="false" onAction="#handleOpen" text="Open…" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Save As…" />
+                        <MenuItem fx:id="close" mnemonicParsing="false" onAction="#handleClose" text="Close" />
+                        <MenuItem fx:id="save" mnemonicParsing="false" onAction="#handleSave" text="Save" />
+                        <MenuItem fx:id="saveas" mnemonicParsing="false" onAction="#handleSaveAs" text="Save As…" />
+                  <MenuItem fx:id="export" mnemonicParsing="false" onAction="#handleExport" text="Export To PDF" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Quit" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleQuit" text="Quit" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                        <MenuItem mnemonicParsing="false" text="About" />
                     </items>
                 </Menu>
             </menus>
@@ -71,8 +72,8 @@
                             <columns>
                                 <TableColumn fx:id="tableId" prefWidth="75.0" text="Id" />
                                 <TableColumn fx:id="tableTitle" prefWidth="300.0" text="Title" />
-                                <TableColumn fx:id="tableLetter" minWidth="100.0" prefWidth="-1.0" text="Letter" />
                                 <TableColumn fx:id="tableNumber" minWidth="100.0" prefWidth="-1.0" text="Number" />
+                                <TableColumn fx:id="tableLetter" minWidth="100.0" prefWidth="-1.0" text="Letter" />
                                 <TableColumn fx:id="tableCategory" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="479.0" text="Category" />
                             </columns>
                             <columnResizePolicy>

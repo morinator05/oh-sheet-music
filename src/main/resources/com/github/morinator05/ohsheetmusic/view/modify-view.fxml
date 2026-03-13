@@ -60,8 +60,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <TextField fx:id="fieldLetter" promptText="Letter" />
-                        <TextField fx:id="fieldNumber" promptText="Number" GridPane.columnIndex="1" />
+                        <TextField fx:id="fieldLetter" promptText="Letter" GridPane.columnIndex="1" />
+                        <TextField fx:id="fieldNumber" promptText="Number" />
                     </children>
                 </GridPane>
             </children>

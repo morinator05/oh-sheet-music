@@ -94,7 +94,27 @@ public class Controller {
     }
 
     @FXML
+    public void handleSaveAs() {
+        //TODO
+    }
+
+    @FXML
     public void handleOpen() {
+        //TODO
+    }
+
+    @FXML
+    public void handleClose() {
+        //TODO
+    }
+
+    @FXML
+    public void handleExport() {
+        //TODO
+    }
+
+    @FXML
+    public void handleQuit() {
         //TODO
     }
 
