@@ -4,6 +4,7 @@ import com.github.morinator05.ohsheetmusic.OhSheetMusicApp;
 import com.github.morinator05.ohsheetmusic.database.DatabaseManager;
 import com.github.morinator05.ohsheetmusic.model.PieceOfMusic;
 import com.github.morinator05.ohsheetmusic.model.Register;
+import com.github.morinator05.ohsheetmusic.service.PdfExportService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,15 +15,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.PrimitiveIterator;
 
-public class Controller {
+public class MainController {
 
     private Register register;
     private File currentFile;
@@ -108,7 +107,7 @@ public class Controller {
 
     @FXML
     public void handleExport() {
-        //TODO
+        PdfExportService.exportToPdf("exported.pdf");
     }
 
     @FXML
