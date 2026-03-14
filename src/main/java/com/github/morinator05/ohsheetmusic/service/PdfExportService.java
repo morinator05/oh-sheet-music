@@ -14,9 +14,9 @@ public class PdfExportService {
 
     public static void exportToPdf(String path, List<PieceOfMusic> piecesToExport) {
 
-        System.out.println("export: starting export");
+        System.out.println("export: started!");
 
-        Font font8 = FontFactory.getFont(FontFactory.HELVETICA, 8);
+        Font font12 = FontFactory.getFont(FontFactory.HELVETICA, 12);
 
         // step 1
         Document document = new Document(PageSize.A4);
@@ -43,24 +43,26 @@ public class PdfExportService {
             table.setTotalWidth(width - 72);
             table.setLockedWidth(true);
 
-            cell = new PdfPCell(new Phrase("Pieces of Music + location in the Register"));
+            cell = new PdfPCell(new Phrase("Oh Sheet Music export"));
             cell.setColspan(columnDefinitionSize.length);
             table.addCell(cell);
 
             for(PieceOfMusic p : piecesToExport) {
-                table.addCell(new Phrase(p.getTitle(), font8));
-                table.addCell(new Phrase((p.getNumber() + p.getLetter()), font8));
+                table.addCell(new Phrase(p.getTitle(), font12));
+                table.addCell(new Phrase((p.getNumber() + p.getLetter()), font12));
             }
 
             document.add(table);
 
+            System.out.println("export finished: " + path);
+
         } catch (DocumentException | IOException de) {
-            System.err.println(de.getMessage());
+            System.err.println("export error: " + de.getMessage());
         }
 
         // step 5
         document.close();
-        System.out.println("export: finished -> " + path);
+
     }
 
 }
