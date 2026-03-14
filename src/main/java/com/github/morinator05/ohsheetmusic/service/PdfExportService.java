@@ -8,6 +8,7 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class PdfExportService {
@@ -46,6 +47,10 @@ public class PdfExportService {
             cell = new PdfPCell(new Phrase("Oh Sheet Music export"));
             cell.setColspan(columnDefinitionSize.length);
             table.addCell(cell);
+
+            piecesToExport.sort(
+                    (p1, p2) -> p1.getTitle().compareTo(p2.getTitle())
+            );
 
             for (PieceOfMusic p : piecesToExport) {
                 table.addCell(new Phrase(p.getTitle(), font12));
