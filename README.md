@@ -3,7 +3,7 @@
 Oh Sheet Music, or "Oh S**** Music", is a tool to manage the sheetmusic in paperform at my local orchestra. 
 I wrote this because I couldn't find any tool that fit my use case and didn't include things I don't need or want. I wanted a clean, simple solution without bloated features.
 
-You can add, update, and remove pieces, then export them to a PDF to put in the box with the paper sheets.
+You can add, update, and remove pieces from the list. Then you can export them to a PDF to put in the box with the paper sheets. The list of pieces is stored in a separate database file.
 
 ![Main View](img/screenshot_main.png)
 
