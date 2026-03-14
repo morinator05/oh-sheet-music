@@ -16,4 +16,7 @@ You can add, update and remove pieces. Then export them to a pdf to put it in th
 ## To-Do (not implemented yet)
 - more themes
 - more pdf export options (e.g. sort by category, splitt categories to different tables)
+- search function
+- automatic saving
+- find free space in the register automatically
 - remote database
