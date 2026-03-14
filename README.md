@@ -7,6 +7,12 @@ You can add, update and remove pieces. Then export them to a pdf to put it in th
 
 ![Main View](img/screenshot_main.png)
 
+## Currently supports
+- management for all pieces (adding, updating, deleting)
+- saving the register to a database file
+- loading from said file
+- very simple export to a pdf 
+
 ## To-Do (not implemented yet)
 - more themes
 - more pdf export options (e.g. sort by category, splitt categories to different tables)
