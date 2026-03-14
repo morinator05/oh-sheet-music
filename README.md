@@ -1,5 +1,9 @@
 # Oh Sheet Music
 
+<p align="center">
+  <img src="img/logo.png" width="150">
+</p>
+
 Oh Sheet Music, or "Oh S**** Music", is a tool to manage the sheetmusic in paperform at my local orchestra. 
 I wrote this because I couldn't find any tool that fit my use case and didn't include things I don't need or want. I wanted a clean, simple solution without bloated features.
 
