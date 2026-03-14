@@ -107,7 +107,7 @@ public class MainController {
 
     @FXML
     public void handleExport() {
-        PdfExportService.exportToPdf("exported.pdf");
+        PdfExportService.exportToPdf("exported.pdf", register.getContents());
     }
 
     @FXML
