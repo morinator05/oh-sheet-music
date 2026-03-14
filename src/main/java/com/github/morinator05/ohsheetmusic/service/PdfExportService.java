@@ -31,7 +31,7 @@ public class PdfExportService {
             document.open();
 
             // step 4
-            float[] columnDefinitionSize = {25F, 75F};
+            float[] columnDefinitionSize = {40F, 60F};
 
             float pos = height / 2;
             PdfPTable table = null;
