@@ -47,13 +47,12 @@ public class PdfExportService {
             cell.setColspan(columnDefinitionSize.length);
             table.addCell(cell);
 
-            for(PieceOfMusic p : piecesToExport) {
+            for (PieceOfMusic p : piecesToExport) {
                 table.addCell(new Phrase(p.getTitle(), font12));
                 table.addCell(new Phrase((p.getNumber() + p.getLetter()), font12));
             }
 
             document.add(table);
-
             System.out.println("export finished: " + path);
 
         } catch (DocumentException | IOException de) {
@@ -62,7 +61,5 @@ public class PdfExportService {
 
         // step 5
         document.close();
-
     }
-
 }
