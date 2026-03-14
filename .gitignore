@@ -25,3 +25,5 @@ Thumbs.db
 # Maven Wrapper Scripte
 mvnw
 mvnw.cmd
+
+*.pdf
