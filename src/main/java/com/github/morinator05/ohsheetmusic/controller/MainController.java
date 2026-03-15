@@ -94,6 +94,7 @@ public class MainController {
     public void handleSaveAs() {
 
         //TODO FIX: when saving to a new location different from where the data was loaded from, only the added, removed and updated is exportet to the database
+        //maybe just move the file there first.
 
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Database files (*.db)", "*.db");
