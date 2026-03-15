@@ -25,8 +25,10 @@ import java.util.List;
 
 public class MainController {
 
+    //TODO: add null-checks
+
     private Register register;
-    private File currentFile = new File("oh-sheet-music.db");
+    File currentFile = new File(System.getProperty("user.home") + "/oh-sheet-music.db");
     private Stage stage;
 
     ObservableList<PieceOfMusic> musicList = FXCollections.observableArrayList();
@@ -119,8 +121,6 @@ public class MainController {
         fileChooser.getExtensionFilters().add(extFilter);
         File selectedFile = fileChooser.showOpenDialog(stage);
 
-        System.out.println("selected: " + currentFile.getAbsolutePath());
-
         if (selectedFile != null) {
             currentFile = selectedFile;
             System.out.println("selected: " + currentFile.getAbsolutePath());
@@ -133,7 +133,16 @@ public class MainController {
 
     @FXML
     public void handleClose() {
-        //TODO
+        if (currentFile != null) {
+            handleSave();
+        }
+
+        register = new Register();
+        currentFile = null;
+
+        textPath.setText("select file!");
+        musicList.clear();
+        System.out.println("info: workspace cleared");
     }
 
     @FXML
@@ -143,7 +152,7 @@ public class MainController {
 
     @FXML
     public void handleQuit() {
-        //TODO
+        stage.close();
     }
 
     @FXML
