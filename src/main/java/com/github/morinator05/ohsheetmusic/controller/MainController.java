@@ -15,16 +15,19 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 public class MainController {
 
     private Register register;
-    private File currentFile;
+    private File currentFile = new File("oh-sheet-music.db");
+    private Stage stage;
 
     ObservableList<PieceOfMusic> musicList = FXCollections.observableArrayList();
     @FXML
@@ -47,17 +50,9 @@ public class MainController {
     public void initialize() {
 
         //TODO: Let the User choose a File
-        currentFile = new File("oh-sheet-music.db");
-        DatabaseManager.setDatabasePath(currentFile.getAbsolutePath());
+        DatabaseManager.setFile(currentFile);
         textPath.setText(currentFile.getAbsolutePath());
-
-        DatabaseManager.initDatabase();
-        this.register = new Register();
-        List<PieceOfMusic> dbData = DatabaseManager.getAllPieces();
-        register.setContents(dbData);
-        System.out.println("init: " + register.getContents().size() + " pieces loaded");
-
-        musicList = FXCollections.observableArrayList(register.getContents());
+        loadDatabase();
 
         tableId.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, Integer>("id"));
         tableTitle.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("title"));
@@ -65,7 +60,12 @@ public class MainController {
         tableLetter.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("letter"));
         tableCategory.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("category"));
 
-        tableView.getItems().setAll(register.getContents());
+        tableView.setItems(musicList);
+        refreshView();
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     @FXML
@@ -97,7 +97,21 @@ public class MainController {
 
     @FXML
     public void handleOpen() {
-        //TODO
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Database files (*.db)", "*.db");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        System.out.println("selected: " + currentFile.getAbsolutePath());
+
+        if (selectedFile != null) {
+            currentFile = selectedFile;
+            System.out.println("selected: " + currentFile.getAbsolutePath());
+            textPath.setText(currentFile.getAbsolutePath());
+
+            loadDatabase();
+            refreshView();
+        }
     }
 
     @FXML
@@ -139,8 +153,6 @@ public class MainController {
 
     private void refreshView() {
         musicList.setAll(register.getContents());
-        tableView.setItems(musicList);
-        tableView.refresh();
     }
 
     private void openModifyWindow(String windowTitle, PieceOfMusic selectedPiece) {
@@ -168,6 +180,15 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadDatabase() {
+        DatabaseManager.setFile(currentFile);
+        DatabaseManager.initDatabase();
+        this.register = new Register();
+        List<PieceOfMusic> dbData = DatabaseManager.getAllPieces();
+        register.setContents(dbData);
+        System.out.println("load: " + register.getContents().size() + " pieces loaded");
     }
 
 }

@@ -1,6 +1,7 @@
 package com.github.morinator05.ohsheetmusic;
 
 import atlantafx.base.theme.PrimerDark;
+import com.github.morinator05.ohsheetmusic.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,6 +22,8 @@ public class OhSheetMusicApp extends Application {
 
         Scene scene = new Scene(fxmlLoader.load());
 
+        MainController mainController = fxmlLoader.getController();
+
 //        String css = getClass().getResource("/com/github/morinator05/ohsheetmusic/view/dark-purple.css").toExternalForm();
 //        scene.getStylesheets().add(css);
 
@@ -32,6 +35,8 @@ public class OhSheetMusicApp extends Application {
         );
 
         stage.setTitle("OhSheetMusic");
+
+        mainController.setStage(stage);
 
         stage.setScene(scene);
         stage.sizeToScene();

@@ -2,6 +2,7 @@ package com.github.morinator05.ohsheetmusic.database;
 
 import com.github.morinator05.ohsheetmusic.model.PieceOfMusic;
 
+import java.io.File;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,13 +10,13 @@ import java.util.List;
 
 public class DatabaseManager {
 
-    private static String dbPath = "jdbc:sqlite:oh-sheet-music.db"; //default path for database
+    private static String dbPath;
 
     DatabaseManager() {
     }
 
-    public static void setDatabasePath(String newPath) {
-        dbPath = "jdbc:sqlite:" + newPath;
+    public static void setFile(File newFile) {
+        dbPath = "jdbc:sqlite:" + newFile.getAbsolutePath();
     }
 
     public static void initDatabase() {
