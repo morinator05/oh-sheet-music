@@ -147,7 +147,7 @@ public class MainController {
 
     @FXML
     public void handleExport() {
-        PdfExportService.exportToPdf("exported.pdf", register.getContents());
+        PdfExportService.exportToPdf(System.getProperty("user.home") + "/oh-sheet-music-exported.pdf", register.getContents());
     }
 
     @FXML
