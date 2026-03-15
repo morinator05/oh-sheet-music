@@ -92,7 +92,23 @@ public class MainController {
 
     @FXML
     public void handleSaveAs() {
-        //TODO
+
+        //TODO FIX: when saving to a new location different from where the data was loaded from, only the added, removed and updated is exportet to the database
+
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Database files (*.db)", "*.db");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        System.out.println("selected: " + currentFile.getAbsolutePath());
+
+        if (selectedFile != null) {
+            currentFile = selectedFile;
+            System.out.println("selected: " + currentFile.getAbsolutePath());
+            textPath.setText(currentFile.getAbsolutePath());
+
+            handleSave();
+        }
     }
 
     @FXML
