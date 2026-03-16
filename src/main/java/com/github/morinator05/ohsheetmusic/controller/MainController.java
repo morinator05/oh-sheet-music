@@ -52,12 +52,6 @@ public class MainController {
     @FXML
     public void initialize() {
 
-        //TODO: Let the User choose a File
-//        currentFile = new File(defaultPath);
-//        DatabaseManager.setFile(currentFile);
-//        textPath.setText(currentFile.getAbsolutePath());
-//        loadDatabase();
-
         tableId.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, Integer>("id"));
         tableTitle.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("title"));
         tableNumber.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("number"));
@@ -70,6 +64,14 @@ public class MainController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    @FXML
+    public void handleNewFile() {
+        currentFile = new File(defaultPath);
+        DatabaseManager.setFile(currentFile);
+        textPath.setText(currentFile.getAbsolutePath());
+        loadDatabase();
     }
 
     @FXML
