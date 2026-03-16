@@ -28,7 +28,8 @@ public class MainController {
     //TODO: add null-checks
 
     private Register register;
-    File currentFile = new File(System.getProperty("user.home") + "/oh-sheet-music.db");
+    private final String defaultPath = System.getProperty("user.home") + "/oh-sheet-music.db";
+    private File currentFile;
     private Stage stage;
 
     ObservableList<PieceOfMusic> musicList = FXCollections.observableArrayList();
@@ -52,9 +53,10 @@ public class MainController {
     public void initialize() {
 
         //TODO: Let the User choose a File
-        DatabaseManager.setFile(currentFile);
-        textPath.setText(currentFile.getAbsolutePath());
-        loadDatabase();
+//        currentFile = new File(defaultPath);
+//        DatabaseManager.setFile(currentFile);
+//        textPath.setText(currentFile.getAbsolutePath());
+//        loadDatabase();
 
         tableId.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, Integer>("id"));
         tableTitle.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("title"));
@@ -74,6 +76,7 @@ public class MainController {
     public void handleSave() {
         System.out.println("saving: ");
         if (currentFile == null) {
+            System.err.println("err: no file selected");
             return;
         }
         for (PieceOfMusic piece : register.getAddedPieces()) {
@@ -94,6 +97,11 @@ public class MainController {
 
     @FXML
     public void handleSaveAs() {
+
+        if (currentFile == null) {
+            System.err.println("err: no file selected");
+            return;
+        }
 
         //TODO FIX: when saving to a new location different from where the data was loaded from, only the added, removed and updated is exportet to the database
         //maybe just move the file there first.
@@ -133,9 +141,7 @@ public class MainController {
 
     @FXML
     public void handleClose() {
-        if (currentFile != null) {
-            handleSave();
-        }
+        handleSave();
 
         register = new Register();
         currentFile = null;
@@ -147,6 +153,10 @@ public class MainController {
 
     @FXML
     public void handleExport() {
+        if (currentFile == null) {
+            System.err.println("err: no file selected");
+            return;
+        }
         PdfExportService.exportToPdf(System.getProperty("user.home") + "/oh-sheet-music-exported.pdf", register.getContents());
     }
 
@@ -157,11 +167,19 @@ public class MainController {
 
     @FXML
     void handleNew() {
+        if (currentFile == null) {
+            System.err.println("err: no file selected");
+            return;
+        }
         openModifyWindow("Add a new piece!", null);
     }
 
     @FXML
     void handleUpdate() {
+        if (currentFile == null) {
+            System.err.println("err: no file selected");
+            return;
+        }
         PieceOfMusic selectedItem = tableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             openModifyWindow("Update the selected piece!", selectedItem);
@@ -170,6 +188,10 @@ public class MainController {
 
     @FXML
     void handleRemove() {
+        if (currentFile == null) {
+            System.err.println("err: no file selected");
+            return;
+        }
         PieceOfMusic selectedItem = tableView.getSelectionModel().getSelectedItem();
         if (selectedItem == null) return;
 
@@ -178,6 +200,10 @@ public class MainController {
     }
 
     private void refreshView() {
+        if(currentFile == null) {
+            textPath.setText("please select a file");
+            return;
+        }
         musicList.setAll(register.getContents());
     }
 
@@ -209,6 +235,10 @@ public class MainController {
     }
 
     private void loadDatabase() {
+        if (currentFile == null) {
+            System.err.println("err: no file selected");
+            return;
+        }
         DatabaseManager.setFile(currentFile);
         DatabaseManager.initDatabase();
         this.register = new Register();
