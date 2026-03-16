@@ -25,8 +25,6 @@ import java.util.List;
 
 public class MainController {
 
-    //TODO: add null-checks
-
     private Register register;
     private final String defaultPath = System.getProperty("user.home") + "/oh-sheet-music.db";
     private File currentFile;
@@ -105,8 +103,8 @@ public class MainController {
             return;
         }
 
-        //TODO FIX: when saving to a new location different from where the data was loaded from, only the added, removed and updated is exportet to the database
-        //maybe just move the file there first.
+        //TODO FIX: when saving to a new location different from where the data was loaded from, only the added, removed and updated is exported to the database
+        // maybe just move the file there first.
 
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Database files (*.db)", "*.db");
