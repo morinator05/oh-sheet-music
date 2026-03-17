@@ -1,11 +1,8 @@
 import com.github.morinator05.ohsheetmusic.database.DatabaseManager;
-import com.github.morinator05.ohsheetmusic.model.PieceOfMusic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.crypto.Data;
 import java.io.File;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
