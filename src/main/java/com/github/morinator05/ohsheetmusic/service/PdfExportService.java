@@ -2,10 +2,12 @@ package com.github.morinator05.ohsheetmusic.service;
 
 import com.github.morinator05.ohsheetmusic.model.PieceOfMusic;
 import com.lowagie.text.*;
+import com.lowagie.text.Font;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
+import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -31,7 +33,7 @@ public class PdfExportService {
             document.open();
 
             // step 4
-            float[] columnDefinitionSize = {40F, 60F};
+            float[] columnDefinitionSize = {80F, 20F};
 
             float pos = height / 2;
             PdfPTable table = null;
@@ -51,9 +53,19 @@ public class PdfExportService {
                     (p1, p2) -> p1.getTitle().compareTo(p2.getTitle())
             );
 
+            int count = 0;
             for (PieceOfMusic p : piecesToExport) {
-                table.addCell(new Phrase(p.getTitle(), font12));
-                table.addCell(new Phrase((p.getNumber() + p.getLetter()), font12));
+                Color backgroundColor = (count % 2 == 0) ? Color.WHITE : Color.LIGHT_GRAY;
+
+                PdfPCell titleCell = new PdfPCell(new Phrase(p.getTitle(), font12));
+                titleCell.setBackgroundColor(backgroundColor);
+                table.addCell(titleCell);
+
+                PdfPCell numCell = new PdfPCell(new Phrase(p.getNumber() + p.getLetter(), font12));
+                numCell.setBackgroundColor(backgroundColor);
+                table.addCell(numCell);
+
+                count++;
             }
 
             document.add(table);
