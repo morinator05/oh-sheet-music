@@ -4,7 +4,7 @@
   <img src="img/icon.png" width="150">
 </p>
 
-Oh Sheet Music, or "Oh S**** Music", is a tool to manage the sheetmusic in paperform at my local orchestra. 
+Oh Sheet Music, or "Oh S**** Music" (this depends on wether you could or coudldn't find your scores during rehersal), is a tool to manage the sheetmusic in paperform at my local orchestra. 
 I wrote this because I couldn't find any tool that fit my use case and didn't include things I don't need or want. I wanted a clean, simple solution without bloated features.
 
 You can add, update, and remove pieces from the list. Then you can export them to a PDF to put in the box with the paper sheets. The list of pieces is stored in a separate database file.
