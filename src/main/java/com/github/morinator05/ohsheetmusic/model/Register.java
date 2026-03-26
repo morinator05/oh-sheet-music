@@ -1,7 +1,5 @@
 package com.github.morinator05.ohsheetmusic.model;
 
-import com.github.morinator05.ohsheetmusic.database.DatabaseManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +58,10 @@ public class Register {
         this.addedPieces.clear();
         this.removedPieces.clear();
         this.updatedPieces.clear();
+    }
+
+    public static Position findEmptySlot() {
+        return new Position("Test", "Test");
     }
 
 }

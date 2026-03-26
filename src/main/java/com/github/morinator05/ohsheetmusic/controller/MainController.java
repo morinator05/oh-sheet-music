@@ -5,6 +5,7 @@ import com.github.morinator05.ohsheetmusic.database.DatabaseManager;
 import com.github.morinator05.ohsheetmusic.model.PieceOfMusic;
 import com.github.morinator05.ohsheetmusic.model.Register;
 import com.github.morinator05.ohsheetmusic.service.PdfExportService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -52,9 +53,10 @@ public class MainController {
 
         tableId.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, Integer>("id"));
         tableTitle.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("title"));
-        tableNumber.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("number"));
-        tableLetter.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("letter"));
         tableCategory.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("category"));
+
+        tableNumber.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().pos.getNumber()));
+        tableLetter.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().pos.getLetter()));
 
         tableView.setItems(musicList);
         refreshView();
@@ -80,7 +82,7 @@ public class MainController {
             return;
         }
         for (PieceOfMusic piece : register.getAddedPieces()) {
-            DatabaseManager.addPiece(piece.getTitle(), piece.getCategory(), piece.getNumber(), piece.getLetter());
+            DatabaseManager.addPiece(piece.getTitle(), piece.getCategory(), piece.pos.getNumber(), piece.pos.getLetter());
             System.out.println("adding: " + piece.getTitle());
         }
         for (PieceOfMusic piece : register.getRemovedPieces()) {
@@ -88,7 +90,7 @@ public class MainController {
             System.out.println("removing: " + piece.getTitle());
         }
         for (PieceOfMusic piece : register.getUpdatedPieces()) {
-            DatabaseManager.updatePiece(piece.getId(), piece.getTitle(), piece.getCategory(), piece.getNumber(), piece.getLetter());
+            DatabaseManager.updatePiece(piece.getId(), piece.getTitle(), piece.getCategory(), piece.pos.getNumber(), piece.pos.getLetter());
             System.out.println("updating: " + piece.getTitle());
         }
         register.flushUpdated();
