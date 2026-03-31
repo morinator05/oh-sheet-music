@@ -61,7 +61,7 @@ public class PdfExportService {
                 titleCell.setBackgroundColor(backgroundColor);
                 table.addCell(titleCell);
 
-                PdfPCell numCell = new PdfPCell(new Phrase(p.getNumber() + p.getLetter(), font12));
+                PdfPCell numCell = new PdfPCell(new Phrase(p.pos.getNumber() + p.pos.getLetter(), font12));
                 numCell.setBackgroundColor(backgroundColor);
                 table.addCell(numCell);
 

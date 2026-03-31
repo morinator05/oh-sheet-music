@@ -1,6 +1,8 @@
 package com.github.morinator05.ohsheetmusic.controller;
 
 import com.github.morinator05.ohsheetmusic.model.PieceOfMusic;
+import com.github.morinator05.ohsheetmusic.model.Position;
+import com.github.morinator05.ohsheetmusic.model.Register;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -22,6 +24,7 @@ public class ModifyController {
 
     private Consumer<PieceOfMusic> onSave;
     private PieceOfMusic currentPiece;
+    private Position emptyPos;
 
     @FXML
     public void initialize() {
@@ -36,9 +39,13 @@ public class ModifyController {
         this.onSave = callback;
         if (selected != null) {
             fieldTitle.setText(selected.getTitle());
-            fieldNumber.setText(selected.getNumber());
-            fieldLetter.setText(selected.getLetter());
+            fieldNumber.setText(selected.pos.getNumber());
+            fieldLetter.setText(selected.pos.getLetter());
             fieldCategory.setText(selected.getCategory());
+        } else {
+            emptyPos = Register.findEmptySlot();
+            fieldNumber.setText(emptyPos.getNumber());
+            fieldLetter.setText(emptyPos.getLetter());
         }
     }
 
