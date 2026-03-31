@@ -17,6 +17,9 @@ To find a piece, you simply look at the alphabetically sorted printed document t
 
 ![Main View](img/screenshot_main.png)
 
+## Installation
+You are on your own:/
+
 ## Currently Supports
 - **Piece Management:** Add, update, and delete entries.
 - **Database Integration:** Save and load the register from a database file.
