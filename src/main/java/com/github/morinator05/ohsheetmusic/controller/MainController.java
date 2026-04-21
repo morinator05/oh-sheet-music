@@ -4,6 +4,7 @@ import com.github.morinator05.ohsheetmusic.OhSheetMusicApp;
 import com.github.morinator05.ohsheetmusic.database.DatabaseManager;
 import com.github.morinator05.ohsheetmusic.model.PieceOfMusic;
 import com.github.morinator05.ohsheetmusic.model.Register;
+import com.github.morinator05.ohsheetmusic.service.ExportOptions;
 import com.github.morinator05.ohsheetmusic.service.PdfExportService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -159,7 +160,10 @@ public class MainController {
             System.err.println("err: no file selected");
             return;
         }
-        PdfExportService.exportToPdf(System.getProperty("user.home") + "/oh-sheet-music-exported.pdf", register.getContents());
+        PdfExportService.exportToPdf(System.getProperty("user.home") + "/oh-sheet-music-exported.pdf",
+                register.getContents(),
+                new ExportOptions(true, true, true)
+        );
     }
 
     @FXML

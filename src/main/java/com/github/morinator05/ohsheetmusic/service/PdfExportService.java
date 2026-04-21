@@ -14,25 +14,24 @@ import java.util.List;
 
 public class PdfExportService {
 
-    public static void exportToPdf(String path, List<PieceOfMusic> piecesToExport) {
+    private ExportOptions options;
+
+    public static void exportToPdf(String path, List<PieceOfMusic> piecesToExport, ExportOptions options) {
 
         System.out.println("export: started!");
 
         Font font12 = FontFactory.getFont(FontFactory.HELVETICA, 12);
 
-        // step 1
         Document document = new Document(PageSize.A4);
 
         try {
-            // step 2
             PdfWriter writer = PdfWriter.getInstance(document,
                     new FileOutputStream(path));
             float width = document.getPageSize().getWidth();
             float height = document.getPageSize().getHeight();
-            // step 3
+
             document.open();
 
-            // step 4
             float[] columnDefinitionSize = {80F, 20F};
 
             float pos = height / 2;
@@ -46,6 +45,7 @@ public class PdfExportService {
             table.setLockedWidth(true);
 
             cell = new PdfPCell(new Phrase("Oh Sheet Music export"));
+            cell.setBackgroundColor(Color.ORANGE);
             cell.setColspan(columnDefinitionSize.length);
             table.addCell(cell);
 
@@ -53,8 +53,25 @@ public class PdfExportService {
                     (p1, p2) -> p1.getTitle().compareTo(p2.getTitle())
             );
 
+            if (options.isSeparateCategories()) {
+                piecesToExport.sort(
+                        (p1, p2) -> p1.getCategory().compareTo(p2.getCategory())
+                );
+            }
+
             int count = 0;
+            String previousCategory = "";
             for (PieceOfMusic p : piecesToExport) {
+
+                if(options.isSeparateCategories() && !p.getCategory().equals(previousCategory)) {
+                    table.addCell(new PdfPCell()); //fill first of the two cells
+
+                    previousCategory = p.getCategory();
+                    PdfPCell titleCell = new PdfPCell(new Phrase(p.getCategory(), font12));
+                    titleCell.setBackgroundColor(Color.ORANGE);
+                    table.addCell(titleCell);
+                }
+
                 Color backgroundColor = (count % 2 == 0) ? Color.WHITE : Color.LIGHT_GRAY;
 
                 PdfPCell titleCell = new PdfPCell(new Phrase(p.getTitle(), font12));
@@ -75,7 +92,6 @@ public class PdfExportService {
             System.err.println("export error: " + de.getMessage());
         }
 
-        // step 5
         document.close();
     }
 }
