@@ -40,7 +40,6 @@ public class OhSheetMusicApp extends Application {
 
         stage.setScene(scene);
         stage.sizeToScene();
-        stage.setResizable(false);
         stage.show();
 
     }
