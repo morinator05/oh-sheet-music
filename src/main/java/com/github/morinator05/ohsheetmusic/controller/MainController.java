@@ -1,7 +1,8 @@
 package com.github.morinator05.ohsheetmusic.controller;
 
 import com.github.morinator05.ohsheetmusic.OhSheetMusicApp;
-import com.github.morinator05.ohsheetmusic.database.DatabaseManager;
+import com.github.morinator05.ohsheetmusic.database.Database;
+import com.github.morinator05.ohsheetmusic.database.SQLiteDatabase;
 import com.github.morinator05.ohsheetmusic.model.PieceOfMusic;
 import com.github.morinator05.ohsheetmusic.model.Register;
 import com.github.morinator05.ohsheetmusic.service.ExportOptions;
@@ -22,10 +23,11 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
 public class MainController {
+
+    private Database database;
 
     private Register register;
     private final String defaultPath = System.getProperty("user.home") + "/oh-sheet-music.db";
@@ -52,6 +54,8 @@ public class MainController {
     @FXML
     public void initialize() {
 
+        database = new SQLiteDatabase(); //maybe use another system later but this works for now
+
         tableId.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, Integer>("id"));
         tableTitle.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("title"));
         tableCategory.setCellValueFactory(new PropertyValueFactory<PieceOfMusic, String>("category"));
@@ -70,7 +74,7 @@ public class MainController {
     @FXML
     public void handleNewFile() {
         currentFile = new File(defaultPath);
-        DatabaseManager.setFile(currentFile);
+        database.setFile(currentFile);
         textPath.setText(currentFile.getAbsolutePath());
         loadDatabase();
     }
@@ -83,15 +87,15 @@ public class MainController {
             return;
         }
         for (PieceOfMusic piece : register.getAddedPieces()) {
-            DatabaseManager.addPiece(piece.getTitle(), piece.getCategory(), piece.pos.getNumber(), piece.pos.getLetter());
+            database.addPiece(piece.getTitle(), piece.getCategory(), piece.pos.getNumber(), piece.pos.getLetter());
             System.out.println("adding: " + piece.getTitle());
         }
         for (PieceOfMusic piece : register.getRemovedPieces()) {
-            DatabaseManager.removePiece(piece.getId());
+            database.removePiece(piece.getId());
             System.out.println("removing: " + piece.getTitle());
         }
         for (PieceOfMusic piece : register.getUpdatedPieces()) {
-            DatabaseManager.updatePiece(piece.getId(), piece.getTitle(), piece.getCategory(), piece.pos.getNumber(), piece.pos.getLetter());
+            database.updatePiece(piece.getId(), piece.getTitle(), piece.getCategory(), piece.pos.getNumber(), piece.pos.getLetter());
             System.out.println("updating: " + piece.getTitle());
         }
         register.flushUpdated();
@@ -245,10 +249,10 @@ public class MainController {
             System.err.println("err: no file selected");
             return;
         }
-        DatabaseManager.setFile(currentFile);
-        DatabaseManager.initDatabase();
+        database.setFile(currentFile);
+        database.init();
         this.register = new Register();
-        List<PieceOfMusic> dbData = DatabaseManager.getAllPieces();
+        List<PieceOfMusic> dbData = database.getAllPieces();
         register.setContents(dbData);
         System.out.println("load: " + register.getContents().size() + " pieces loaded");
     }

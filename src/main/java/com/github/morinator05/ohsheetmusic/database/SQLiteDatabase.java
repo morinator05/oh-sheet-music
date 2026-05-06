@@ -8,18 +8,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseManager {
+public class SQLiteDatabase implements Database {
 
-    private static String dbPath;
+    private String dbPath;
 
-    DatabaseManager() {
+    public SQLiteDatabase() {
     }
 
-    public static void setFile(File newFile) {
+    public void setFile(File newFile) {
         dbPath = "jdbc:sqlite:" + newFile.getAbsolutePath();
     }
 
-    public static void initDatabase() {
+    @Override
+    public void init() {
         // SQL statement for creating a new table
         var sql = "CREATE TABLE IF NOT EXISTS register (" +
                 "	id INTEGER PRIMARY KEY," +
@@ -35,7 +36,8 @@ public class DatabaseManager {
         }
     }
 
-    public static void clearDatabase() {
+    @Override
+    public void clear() {
         var sql = "DELETE FROM register";
         try (var conn = DriverManager.getConnection(dbPath); var stmt = conn.createStatement()) {
             stmt.execute(sql);
@@ -44,7 +46,8 @@ public class DatabaseManager {
         }
     }
 
-    public static List<PieceOfMusic> getAllPieces() {
+    @Override
+    public List<PieceOfMusic> getAllPieces() {
 
         List<PieceOfMusic> pieces = new ArrayList<>();
         var sql = "SELECT * from register";
@@ -71,7 +74,7 @@ public class DatabaseManager {
         return pieces;
     }
 
-    public static void addPiece(String title, String category, String cabinet_row, String cabinet_column) {
+    public void addPiece(String title, String category, String cabinet_row, String cabinet_column) {
         var sql = "INSERT INTO register(title, category, cabinet_row, cabinet_column) VALUES(?, ?, ?, ?)";
 
         try (var conn = DriverManager.getConnection(dbPath);
@@ -89,7 +92,7 @@ public class DatabaseManager {
         }
     }
 
-    public static void removePiece(int id) {
+    public void removePiece(int id) {
         var sql = "DELETE FROM register WHERE id = ?";
 
         try (var conn = DriverManager.getConnection(dbPath);
@@ -102,7 +105,7 @@ public class DatabaseManager {
         }
     }
 
-    public static void updatePiece(int id, String newName, String newCategory, String newCabinet_row, String newCabinet_column) {
+    public void updatePiece(int id, String newName, String newCategory, String newCabinet_row, String newCabinet_column) {
         var sql = "UPDATE register SET title = ?, category = ?, cabinet_row = ?, cabinet_column = ? WHERE id = ?";
 
         try (var conn = DriverManager.getConnection(dbPath);
